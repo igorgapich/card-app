@@ -1,4 +1,3 @@
-import React, {useContext} from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -7,53 +6,12 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from "@mui/material/Button";
-import {CartContext} from "./CartContext"; // Імпортуйте компонент Cart
+import {useContext} from "react";
+import {ProductContext} from "./ProductReducer";
 
 const ProductList = () => {
-    const { setCartItems } = useContext(CartContext);
-
-
-    const products = [
-        {
-            id: 1,
-            name: "Молоко",
-            price: 22
-        },
-        {
-            id: 2,
-            name: "Вода",
-            price: 13
-        },
-        {
-            id: 3,
-            name: "Пиво",
-            price: 36
-        },
-        {
-            id: 4,
-            name: "Хліб",
-            price: 30
-        },
-        {
-            id: 5,
-            name: "Сметана",
-            price: 52
-        },
-    ];
-
-    const addToCart = (product) => {
-        setCartItems(prevCartItems => {
-            const existingItem = prevCartItems.find(item => item.id === product.id);
-            if (existingItem) {
-                existingItem.quantity += 1;
-                return [...prevCartItems];
-            } else {
-                return [...prevCartItems, { ...product, quantity: 1 }];
-            }
-        });
-    };
-
-    return (
+    const {products, handleAddToCart} = useContext(ProductContext);
+     return (
         <div>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="caption table">
@@ -74,7 +32,7 @@ const ProductList = () => {
                                 <TableCell align="center">{p.name}</TableCell>
                                 <TableCell align="center">{p.price}</TableCell>
                                 <TableCell align="center">
-                                    <Button onClick={() => addToCart(p)}>Додати до корзини</Button>
+                                    <Button onClick={() => handleAddToCart(p.id)}>Додати до корзини</Button>
                                 </TableCell>
                             </TableRow>
                         ))}

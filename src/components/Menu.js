@@ -8,7 +8,8 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { CartContext } from "./CartContext";
+//import { CartContext } from "./CartContext";
+import {ProductContext} from "./ProductReducer";
 
 const pages = [
     {
@@ -17,7 +18,7 @@ const pages = [
     },
     {
         itemName: "Product List",
-        path: "/productlist"
+        path: "/productslist"
     },
     {
         itemName: "Cart",
@@ -26,12 +27,10 @@ const pages = [
 ];
 
 const Menu = () => {
-    const { cartItems } = useContext(CartContext);
+    const { count } = useContext(ProductContext);
 
     // Обчислює загальну кількість унікальних товарів у кошику
-    const uniqueItemCount = cartItems.reduce((count, item) => {
-        return count + item.quantity;
-    }, 0);
+    // const uniqueItemCount = count;
 
     return (
         <Box sx={{flexGrow: 1}}>
@@ -49,15 +48,14 @@ const Menu = () => {
                     <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                         Product Card
                     </Typography>
-                    {pages.map((page)=>(
+                    {pages.map((page) => (
                         <Link key={page.itemName} to={page.path} color="inherit">
-                            <Button color="inherit" style={{ color: "white" }}>{page.itemName}</Button>
+                            <Button color="inherit" style={{color: "white"}}>{page.itemName}</Button>
                         </Link>
                     ))}
-                    <Button color="inherit" style={{ color: "white" }}>
-                        ({uniqueItemCount})
-                    </Button>
-
+                    <Typography style={{ color: "white" }}>
+                        <label>{count}</label>
+                    </Typography>
                 </Toolbar>
             </AppBar>
         </Box>
