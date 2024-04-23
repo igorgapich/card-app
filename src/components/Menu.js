@@ -8,8 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-//import { CartContext } from "./CartContext";
-import {ProductContext} from "./ProductReducer";
+import {CartContext} from "./CartReducer";
 
 const pages = [
     {
@@ -27,10 +26,7 @@ const pages = [
 ];
 
 const Menu = () => {
-    const { count } = useContext(ProductContext);
-
-    // Обчислює загальну кількість унікальних товарів у кошику
-    // const uniqueItemCount = count;
+    const { count } = useContext(CartContext);
 
     return (
         <Box sx={{flexGrow: 1}}>
@@ -54,7 +50,7 @@ const Menu = () => {
                         </Link>
                     ))}
                     <Typography style={{ color: "white" }}>
-                        <label>{count}</label>
+                        {count}
                     </Typography>
                 </Toolbar>
             </AppBar>

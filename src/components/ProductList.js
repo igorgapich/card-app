@@ -7,10 +7,12 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from "@mui/material/Button";
 import {useContext} from "react";
-import {ProductContext} from "./ProductReducer";
+import {ProductContext} from "./ProductContext";
+import {CartContext} from "./CartReducer";
 
 const ProductList = () => {
-    const {products, handleAddToCart} = useContext(ProductContext);
+    const {products} = useContext(ProductContext);
+    const {handleAddToCart} = useContext(CartContext);
      return (
         <div>
             <TableContainer component={Paper}>
@@ -32,7 +34,7 @@ const ProductList = () => {
                                 <TableCell align="center">{p.name}</TableCell>
                                 <TableCell align="center">{p.price}</TableCell>
                                 <TableCell align="center">
-                                    <Button onClick={() => handleAddToCart(p.id)}>Додати до корзини</Button>
+                                    <Button onClick={() => handleAddToCart(p)}>Додати до корзини</Button>
                                 </TableCell>
                             </TableRow>
                         ))}

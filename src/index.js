@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import {BrowserRouter} from "react-router-dom";
 import CartProvider from "./components/CartReducer";
-import ProductProvider from "./components/ProductReducer";
+import ProductProvider from "./components/ProductContext";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
